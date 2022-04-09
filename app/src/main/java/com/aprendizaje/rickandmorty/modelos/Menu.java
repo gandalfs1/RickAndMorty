@@ -9,6 +9,7 @@ public class Menu {
         this.name = name;
     }
 
+
     public String getImage() {
         return image;
     }

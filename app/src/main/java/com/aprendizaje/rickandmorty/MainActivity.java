@@ -2,6 +2,7 @@ package com.aprendizaje.rickandmorty;
 
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.aprendizaje.rickandmorty.actividades.Characters;
 import com.aprendizaje.rickandmorty.adaptadores.MenuAdapter;
 import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
@@ -38,8 +40,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CallbackMenu {
-    Button click;
-    Button click2;
     RequestQueue requestQueue;
     TextView verTexto;
     Api api;
@@ -61,19 +61,31 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
         // stringRequest();
         //jsonArrayRequest();
-        //if((api = readRegisters.readUrls()) == null){
-        // getUrls();
-       /* }else{
+        if((api = readRegisters.readUrls()) == null){
+         getUrls();
+        }else{
             Toast.makeText(MainActivity.this, "Ya estan los registros", Toast.LENGTH_SHORT).show();
-        }*/
-
-
-        // startActivity(new Intent(this, Characters.class));
+        }
 
     }
 
     @Override
     public void clickListener(Menu menu) {
+        Toast.makeText(this, "hola name"+ menu.getName(), Toast.LENGTH_SHORT).show();
+        switch (menu.getName()){
+            case NAME_MENU_CHARACTES:
+                startActivity(new Intent(this, Characters.class));
+                break;
+            case NAME_MENU_LOCATIONS:
+               // startActivity(new Intent(this, Characters.class));
+                break;
+            case NAME_MENU_EPISODES:
+               // startActivity(new Intent(this, Characters.class));
+                break;
+            case NAME_MENU_FAVORITES:
+                // startActivity(new Intent(this, Characters.class));
+                break;
+        }
 
     }
 
@@ -88,10 +100,10 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
         answersEpisodes = new AnswersEpisodes();
         recyclerViewMenu = findViewById(R.id.recyclerViewMenu);
         listMenu = new ArrayList<>();
-        listMenu.add(new Menu(IMG_MENU_CHARACTERS, "CHARACTERS"));
-        listMenu.add(new Menu(IMG_MENU_LOCATIONS, "LOCATIONS"));
-        listMenu.add(new Menu(IMG_MENU_EPISODES, "EPISODES"));
-        listMenu.add(new Menu(IMG_MENU_FAVORITES, "FAVORITES"));
+        listMenu.add(new Menu(IMG_MENU_CHARACTERS, NAME_MENU_CHARACTES));
+        listMenu.add(new Menu(IMG_MENU_LOCATIONS, NAME_MENU_LOCATIONS));
+        listMenu.add(new Menu(IMG_MENU_EPISODES, NAME_MENU_EPISODES));
+        listMenu.add(new Menu(IMG_MENU_FAVORITES, NAME_MENU_FAVORITES));
         menuAdapter = new MenuAdapter(MainActivity.this, listMenu ,MainActivity.this::clickListener);
         recyclerViewMenu.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
         recyclerViewMenu.setAdapter(menuAdapter);

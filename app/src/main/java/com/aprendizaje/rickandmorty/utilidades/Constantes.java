@@ -81,5 +81,8 @@ public class Constantes {
     public static final String IMG_MENU_LOCATIONS = "https://images8.alphacoders.com/642/thumb-1920-642527.jpg";
     public static final String IMG_MENU_EPISODES = "https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/05/rick-and-morty-best-episodes.jpg";
     public static final String IMG_MENU_FAVORITES = "https://static1.colliderimages.com/wordpress/wp-content/uploads/2019/11/rick-and-morty-the-old-man-and-the-seat.jpg?q=50&fit=crop&w=1920&dpr=1.5";
-    //public static final String IMG_MENU_CHARACTERS = "" ;
+    public static final String NAME_MENU_CHARACTES = "CHARACTERS";
+    public static final String NAME_MENU_LOCATIONS = "LOCATIONS";
+    public static final String NAME_MENU_EPISODES = "EPISODES";
+    public static final String NAME_MENU_FAVORITES ="FAVORITES";
 }
