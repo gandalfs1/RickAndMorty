@@ -12,4 +12,6 @@ public class Constantes {
             + COLUMN_URL_CHARACTERS + " TEXT,"
             + COLUMN_URL_LOCATIONS + " TEXT,"
             + COLUMN_URL_EPISODES + " TEXT );";
+
+    public static final String URL = "url";
 }

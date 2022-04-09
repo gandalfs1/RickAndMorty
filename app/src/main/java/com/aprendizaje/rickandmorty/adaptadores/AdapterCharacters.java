@@ -1,5 +1,7 @@
 package com.aprendizaje.rickandmorty.adaptadores;
 
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.URL;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -94,7 +96,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
             nameCharacter.setOnClickListener(v ->{
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DataCharacter.class);
-                intent.putExtra("ID",resultsArrayList.get(getAdapterPosition()).getId());
+                intent.putExtra(URL,resultsArrayList.get(getAdapterPosition()).getUrl());
                 context.startActivity(intent);
             });
         }

@@ -1,6 +1,7 @@
 package com.aprendizaje.rickandmorty.actividades;
 
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.BASEURL;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -33,7 +34,7 @@ public class DataCharacter extends AppCompatActivity {
 
     AdapterEpisode adapterEpisode;
     RecyclerView recyclerViewEpisodes;
-    int id = 0;
+    String url ;
     Results results;
     Gson gson;
     RequestQueue requestQueue;
@@ -49,12 +50,12 @@ public class DataCharacter extends AppCompatActivity {
 
         requestQueue = Volley.newRequestQueue(this);
         Bundle extras = getIntent().getExtras();
-        id = extras.getInt("ID");
+        url = extras.getString(URL);
         jsonObjet();
     }
 
     private void jsonObjet() {
-        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, BASEURL + "/character/" + id, null, new Response.Listener<JSONObject>() {
+        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 results = gson.fromJson(response.toString(), Results.class);
