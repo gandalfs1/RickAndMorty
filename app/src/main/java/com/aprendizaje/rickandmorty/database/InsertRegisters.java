@@ -19,8 +19,6 @@ public class InsertRegisters extends DataBase{
     }
 
     public long insertUrls(Api api){
-
-
         try {
             DataBase dataBase = new DataBase(context);
             SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();

@@ -1,13 +1,10 @@
 package com.aprendizaje.rickandmorty.actividades;
 
-import static com.aprendizaje.rickandmorty.utilidades.Constantes.BASEURL;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,7 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.R;
 import com.aprendizaje.rickandmorty.adaptadores.AdapterCharacters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
-import com.aprendizaje.rickandmorty.modelos.Answers;
+import com.aprendizaje.rickandmorty.modelos.AnswersCharacters;
 import com.aprendizaje.rickandmorty.modelos.Api;
 import com.aprendizaje.rickandmorty.modelos.Results;
 import com.google.gson.Gson;
@@ -33,7 +30,7 @@ public class Characters extends AppCompatActivity {
     Api api;
     Gson gson;
     RequestQueue requestQueue;
-    Answers answers;
+    AnswersCharacters answersCharacters;
     ReadRegisters readRegisters;
     RecyclerView recyclerViewCharacters;
     AdapterCharacters adapterCharacters;
@@ -44,7 +41,7 @@ public class Characters extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
         api = new Api();
-        answers = new Answers();
+        answersCharacters = new AnswersCharacters();
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
         readRegisters = new ReadRegisters(this);
@@ -68,8 +65,8 @@ public class Characters extends AppCompatActivity {
         JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, api.getCharacters(), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                answers = gson.fromJson(response.toString(), Answers.class);
-                arrar(answers.getResults());
+                answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
+                arrar(answersCharacters.getResults());
 
             }
         }, new Response.ErrorListener() {
