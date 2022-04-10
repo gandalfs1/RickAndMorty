@@ -1,7 +1,8 @@
 package com.aprendizaje.rickandmorty.actividades;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,27 +15,26 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
-import com.aprendizaje.rickandmorty.MainActivity;
 import com.aprendizaje.rickandmorty.R;
+import com.aprendizaje.rickandmorty.adaptadores.AdapterEpisodes;
 import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
-import com.aprendizaje.rickandmorty.modelos.AnswersCharacters;
 import com.aprendizaje.rickandmorty.modelos.AnswersEpisodes;
-import com.aprendizaje.rickandmorty.modelos.AnswersLocations;
 import com.aprendizaje.rickandmorty.modelos.Api;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-public class Episode extends AppCompatActivity {
+public class Episodes extends AppCompatActivity {
 
     InsertRegisters insertRegisters;
     AnswersEpisodes answersEpisodes;
     Gson gson;
     RequestQueue requestQueue;
     ReadRegisters readRegisters;
-    TextView name;
     Api api;
+    RecyclerView recyclerViewEpisode;
+    AdapterEpisodes adapterEpisodes;
 
 
     @Override
@@ -50,10 +50,10 @@ public class Episode extends AppCompatActivity {
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
         readRegisters = new ReadRegisters(this);
-        name = findViewById(R.id.nameEpisode);
         api = new Api();
         readRegisters = new ReadRegisters(this);
         api= readRegisters.readUrls();
+        recyclerViewEpisode = findViewById(R.id.recyclerViewEpisode);
         getEpisodes();
     }
 
@@ -62,19 +62,15 @@ public class Episode extends AppCompatActivity {
         @Override
         public void onResponse(JSONObject response) {
             answersEpisodes = gson.fromJson(response.toString(), AnswersEpisodes.class);
-            Toast.makeText(Episode.this, answersEpisodes.getResults().get(2).getName(), Toast.LENGTH_SHORT).show();
-
-               insertRegisters.insertEpisodes(answersEpisodes.getResults());
-
-
-           // name.setText(response.toString());
-
-
+            Toast.makeText(Episodes.this, answersEpisodes.getResults().get(2).getName(), Toast.LENGTH_SHORT).show();
+            adapterEpisodes = new AdapterEpisodes(answersEpisodes.getResults(),Episodes.this);
+            recyclerViewEpisode.setLayoutManager(new GridLayoutManager(Episodes.this,1));
+            recyclerViewEpisode.setAdapter(adapterEpisodes);
         }
     }, new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Toast.makeText(Episode.this, "mal ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Episodes.this, "mal ", Toast.LENGTH_SHORT).show();
         }
     });
 

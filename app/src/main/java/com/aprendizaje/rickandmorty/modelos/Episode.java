@@ -39,11 +39,11 @@ public class Episode {
         this.air_date = air_date;
     }
 
-    public String getEpisode() {
+    public String getCodeEpisode() {
         return episode;
     }
 
-    public void setEpisode(String episode) {
+    public void setCodeEpisode(String episode) {
         this.episode = episode;
     }
 
