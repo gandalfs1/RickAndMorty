@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.actividades.Characters;
 import com.aprendizaje.rickandmorty.actividades.Episodes;
+import com.aprendizaje.rickandmorty.actividades.Locations;
 import com.aprendizaje.rickandmorty.adaptadores.MenuAdapter;
 import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
                 startActivity(new Intent(this, Characters.class));
                 break;
             case NAME_MENU_LOCATIONS:
-               // startActivity(new Intent(this, Characters.class));
+                startActivity(new Intent(this, Locations.class));
                 break;
             case NAME_MENU_EPISODES:
                 startActivity(new Intent(this, Episodes.class));
