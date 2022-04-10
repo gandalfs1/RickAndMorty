@@ -74,7 +74,7 @@ public class DataCharacter extends AppCompatActivity {
 
     private void arrar(ArrayList<String> results) {
         adapterEpisode = new AdapterEpisode(results, DataCharacter.this);
-        recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,4));
+        recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,3));
         recyclerViewEpisodes.setAdapter(adapterEpisode);
     }
 }

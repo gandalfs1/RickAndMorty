@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".actividades.Characters">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/characters" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCharacters"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/list_item_chracter" />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
