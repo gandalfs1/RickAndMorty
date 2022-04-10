@@ -2,11 +2,11 @@ package com.aprendizaje.rickandmorty.modelos;
 
 import java.util.ArrayList;
 
-public class Answers {
+public class AnswersLocations {
     Info info;
-    ArrayList<Results> results;
+    ArrayList<Location> results;
 
-    public Answers() {
+    public AnswersLocations() {
     }
 
     public Info getInfo() {
@@ -17,11 +17,11 @@ public class Answers {
         this.info = info;
     }
 
-    public ArrayList<Results> getResults() {
+    public ArrayList<Location> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Results> results) {
+    public void setResults(ArrayList<Location> results) {
         this.results = results;
     }
 }

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RickAndMorty">
         <activity
+            android:name=".actividades.Episodes"
+            android:exported="false" />
+        <activity
             android:name=".actividades.DataCharacter"
             android:exported="true" />
         <activity

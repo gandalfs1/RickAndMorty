@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.Nullable;
 
+import com.aprendizaje.rickandmorty.modelos.AnswersEpisodes;
 import com.aprendizaje.rickandmorty.modelos.Api;
+import com.aprendizaje.rickandmorty.modelos.Episode;
+
+import java.util.ArrayList;
 
 
 public class InsertRegisters extends DataBase{
@@ -19,8 +23,6 @@ public class InsertRegisters extends DataBase{
     }
 
     public long insertUrls(Api api){
-
-
         try {
             DataBase dataBase = new DataBase(context);
             SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
@@ -33,6 +35,30 @@ public class InsertRegisters extends DataBase{
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public long insertEpisodes(ArrayList<Episode> episodeArrayList){
+        long id = 0;
+        try {
+            DataBase dataBase = new DataBase(context);
+            SQLiteDatabase sqLiteDatabase = dataBase.getWritableDatabase();
+            for (int i = 0; i < episodeArrayList.size(); i++) {
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(COLUMN_ID_EPISODE,episodeArrayList.get(i).getId());
+                contentValues.put(COLUMN_NAME_CHARACTER,episodeArrayList.get(i).getName());
+                contentValues.put(COLUMN_AIR_DATE_EPISODE,episodeArrayList.get(i).getAir_date());
+                contentValues.put(COLUMN_CODE_EPISODE,episodeArrayList.get(i).getCodeEpisode());
+                // contentValues.put(COLUMN_ID_EPISODE,episode.getId());
+                contentValues.put(COLUMN_URL_EPISODE,episodeArrayList.get(i).getUrl());
+                contentValues.put(COLUMN_CREATED_EPISODE,episodeArrayList.get(i).getCreated());
+                id = sqLiteDatabase.insert(TABLE_EPISODES, null,contentValues);
+            }
+            return  id;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return id;
         }
     }
 }

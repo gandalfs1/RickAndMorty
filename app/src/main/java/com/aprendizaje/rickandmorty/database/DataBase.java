@@ -19,6 +19,7 @@ public class DataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         sqLiteDatabase.execSQL(CREATE_TABLE_URLS);
+        sqLiteDatabase.execSQL(CREATE_TABLE_EPISODES);
 
     }
 
