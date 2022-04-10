@@ -31,7 +31,7 @@
                 android:background="#90000000"
                 android:gravity="center"
                 android:text="Locations"
-                android:textColor="@color/white"
+                android:textColor="#6FF2FB"
                 android:textSize="40dp"
                 android:textColorHint="@color/black"/>
         </androidx.cardview.widget.CardView>

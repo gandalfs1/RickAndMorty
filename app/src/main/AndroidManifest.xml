@@ -15,7 +15,7 @@
             android:name=".actividades.Locations"
             android:exported="true" />
         <activity
-            android:name=".actividades.Episode"
+            android:name=".actividades.Episodes"
             android:exported="false" />
         <activity
             android:name=".actividades.DataCharacter"

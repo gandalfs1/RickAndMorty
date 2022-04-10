@@ -10,16 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aprendizaje.rickandmorty.R;
-import com.aprendizaje.rickandmorty.modelos.Results;
 
 import java.util.ArrayList;
 
-public class AdapterEpisode extends RecyclerView.Adapter<AdapterEpisode.EpisodeViewHolder>{
+public class AdapterCharactersEpisode extends RecyclerView.Adapter<AdapterCharactersEpisode.EpisodeViewHolder>{
 
     ArrayList<String> listEpisodes;
     Activity activity;
 
-    public AdapterEpisode(ArrayList<String> listEpisodes, Activity activity) {
+    public AdapterCharactersEpisode(ArrayList<String> listEpisodes, Activity activity) {
         this.listEpisodes = listEpisodes;
         this.activity = activity;
     }
@@ -27,8 +26,8 @@ public class AdapterEpisode extends RecyclerView.Adapter<AdapterEpisode.EpisodeV
     @NonNull
     @Override
     public EpisodeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_episodes, null,false);
-        return new AdapterEpisode.EpisodeViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_character_episodes, null,false);
+        return new AdapterCharactersEpisode.EpisodeViewHolder(view);
     }
 
     @Override

@@ -4,13 +4,11 @@ import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -23,6 +21,7 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.actividades.Characters;
+import com.aprendizaje.rickandmorty.actividades.Episodes;
 import com.aprendizaje.rickandmorty.adaptadores.MenuAdapter;
 import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
@@ -62,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
         // stringRequest();
         //jsonArrayRequest();
         if((api = readRegisters.readUrls()) == null){
-         getUrls();
+            getUrls();
+            Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(MainActivity.this, "Ya estan los registros", Toast.LENGTH_SHORT).show();
         }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
     @Override
     public void clickListener(Menu menu) {
-        Toast.makeText(this, "hola name"+ menu.getName(), Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this, "hola name"+ menu.getName(), Toast.LENGTH_SHORT).show();
         switch (menu.getName()){
             case NAME_MENU_CHARACTES:
                 startActivity(new Intent(this, Characters.class));
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
                // startActivity(new Intent(this, Characters.class));
                 break;
             case NAME_MENU_EPISODES:
-               // startActivity(new Intent(this, Characters.class));
+                startActivity(new Intent(this, Episodes.class));
                 break;
             case NAME_MENU_FAVORITES:
                 // startActivity(new Intent(this, Characters.class));
@@ -158,12 +158,12 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
             public void onResponse(JSONObject response) {
                 api = gson.fromJson(response.toString(), Api.class);
                 // verTexto.setText(response.toString());
+
                 if (insertRegisters.insertUrls(api) > 0) {
                     Toast.makeText(MainActivity.this, "Se Agregaron urls", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Error al agregar urls", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

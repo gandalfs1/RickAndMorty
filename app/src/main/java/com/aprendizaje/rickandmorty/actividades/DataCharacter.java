@@ -1,15 +1,12 @@
 package com.aprendizaje.rickandmorty.actividades;
 
-import static com.aprendizaje.rickandmorty.utilidades.Constantes.BASEURL;
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.URL;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,11 +15,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
-import com.aprendizaje.rickandmorty.MainActivity;
 import com.aprendizaje.rickandmorty.R;
-import com.aprendizaje.rickandmorty.adaptadores.AdapterCharacters;
-import com.aprendizaje.rickandmorty.adaptadores.AdapterEpisode;
-import com.aprendizaje.rickandmorty.modelos.Api;
+import com.aprendizaje.rickandmorty.adaptadores.AdapterCharactersEpisode;
 import com.aprendizaje.rickandmorty.modelos.Results;
 import com.google.gson.Gson;
 
@@ -32,7 +26,7 @@ import java.util.ArrayList;
 
 public class DataCharacter extends AppCompatActivity {
 
-    AdapterEpisode adapterEpisode;
+    AdapterCharactersEpisode adapterCharactersEpisode;
     RecyclerView recyclerViewEpisodes;
     String url ;
     Results results;
@@ -73,8 +67,8 @@ public class DataCharacter extends AppCompatActivity {
     }
 
     private void arrar(ArrayList<String> results) {
-        adapterEpisode = new AdapterEpisode(results, DataCharacter.this);
-        recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,4));
-        recyclerViewEpisodes.setAdapter(adapterEpisode);
+        adapterCharactersEpisode = new AdapterCharactersEpisode(results, DataCharacter.this);
+        recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,3));
+        recyclerViewEpisodes.setAdapter(adapterCharactersEpisode);
     }
 }
