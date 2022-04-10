@@ -34,19 +34,20 @@ public class Constantes {
 
     public static final String TABLE_EPISODES ="episodes";
     public static final String COLUMN_ID_EPISODE = "col_id_episode";
-    public static final String COLUMN_NAME_EPISODE = "col_id_episode";
-    public static final String COLUMN_AIR_DATE_EPISODE = "col_id_episode";
-    public static final String COLUMN_CODE_EPISODE = "col_id_episode";
-    public static final String COLUMN_CHARACTES_EPISODE = "col_id_episode";
-    public static final String COLUMN_URL_EPISODE = "col_id_episode";
-    public static final String COLUMN_CREATED_EPISODE = "col_id_episode";
-    public static final String CREATE_TABLE_EPISODES = "CREATE TABLE " + TABLE_lOCATIONS + " ( "
+    public static final String COLUMN_NAME_EPISODE = "col_name_episode";
+    public static final String COLUMN_AIR_DATE_EPISODE = "col_air_date_episode";
+    public static final String COLUMN_CODE_EPISODE = "col_code_episode";
+    public static final String COLUMN_CHARACTES_EPISODE = "col_character_episode";
+    public static final String COLUMN_URL_EPISODE = "col_url_episode";
+    public static final String COLUMN_CREATED_EPISODE = "col_created_episode";
+    public static final String CREATE_TABLE_EPISODES = "CREATE TABLE " + TABLE_EPISODES + " ( "
             + COLUMN_ID_lOCATION + " INTEGER,"
-            + COLUMN_NAME_lOCATION + " TEXT,"
-            + COLUMN_TYPE_lOCATION + " TEXT,"
-            + COLUMN_DIMENSION_lOCATION + " TEXT,"
-            + COLUMN_RESIDENTS_lOCATION + " TEXT,"
-            + COLUMN_URL_lOCATION + " TEXT,"
+            + COLUMN_NAME_EPISODE + " TEXT,"
+            + COLUMN_AIR_DATE_EPISODE + " TEXT,"
+            + COLUMN_CODE_EPISODE + " TEXT,"
+            + COLUMN_CHARACTES_EPISODE + " TEXT,"
+            + COLUMN_URL_EPISODE + " TEXT,"
+            + COLUMN_CREATED_EPISODE + " TEXT,"
             + COLUMN_CREATED_lOCATION + " TEXT );";
 
     public static final String TABLE_CHARACTERS ="characters";
