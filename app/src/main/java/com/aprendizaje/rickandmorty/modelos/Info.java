@@ -1,4 +1,5 @@
 package com.aprendizaje.rickandmorty.modelos;
+import static com.aprendizaje.rickandmorty.MainActivity.*;
 
 public class Info {
 
@@ -7,7 +8,11 @@ public class Info {
     String next;
     String prev;
 
-    public Info() {
+    public static Info getInstance() {
+        if (info == null){
+            info = new Info();
+        }
+        return info;
     }
 
     public int getCount() {

@@ -32,6 +32,7 @@ import com.aprendizaje.rickandmorty.modelos.AnswersLocations;
 import com.aprendizaje.rickandmorty.modelos.Api;
 import com.aprendizaje.rickandmorty.modelos.Character;
 import com.aprendizaje.rickandmorty.modelos.Episode;
+import com.aprendizaje.rickandmorty.modelos.Info;
 import com.aprendizaje.rickandmorty.modelos.Location;
 import com.aprendizaje.rickandmorty.modelos.Menu;
 import com.google.gson.Gson;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements CallbackMenu {
     RequestQueue requestQueue;
     TextView verTexto;
+    public static Info info = null;
     public static Api api = null;
     public static AnswersCharacters answersCharacters = null;
     public static Character characterModel = null;
