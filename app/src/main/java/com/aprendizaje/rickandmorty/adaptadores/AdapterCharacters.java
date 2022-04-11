@@ -16,18 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aprendizaje.rickandmorty.R;
 import com.aprendizaje.rickandmorty.actividades.DataCharacter;
-import com.aprendizaje.rickandmorty.modelos.Results;
+import com.aprendizaje.rickandmorty.modelos.Character;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.CharacterViewHolder> {
 
-    ArrayList<Results> resultsArrayList;
+    ArrayList<Character> characterArrayList;
     Activity activity;
 
-    public AdapterCharacters(ArrayList<Results> resultsArrayList, Activity activity) {
-        this.resultsArrayList = resultsArrayList;
+    public AdapterCharacters(ArrayList<Character> characterArrayList, Activity activity) {
+        this.characterArrayList = characterArrayList;
         this.activity = activity;
     }
 
@@ -45,14 +45,14 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
         holder.unknownCharacter.setVisibility(View.GONE);
         Glide
                 .with(activity)
-                .load(resultsArrayList.get(position).getImage())
+                .load(characterArrayList.get(position).getImage())
                 .centerCrop()
                 .into(holder.imgCharacter);
-        holder.nameCharacter.setText(resultsArrayList.get(position).getName());
+        holder.nameCharacter.setText(characterArrayList.get(position).getName());
 
-        holder.statusCharacter.setText(resultsArrayList.get(position).getStatus());
+        holder.statusCharacter.setText(characterArrayList.get(position).getStatus());
 
-        switch (resultsArrayList.get(position).getStatus()){
+        switch (characterArrayList.get(position).getStatus()){
             case "Alive":
                 holder.aliveCharacter.setVisibility(View.VISIBLE);
                 break;
@@ -63,13 +63,13 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
                 holder.unknownCharacter.setVisibility(View.VISIBLE);
                 break;
         }
-        holder.speciesCharacter.setText(resultsArrayList.get(position).getSpecies());
-        holder.locatioNameCharacter.setText(resultsArrayList.get(position).getLocation().getName());
+        holder.speciesCharacter.setText(characterArrayList.get(position).getSpecies());
+        holder.locatioNameCharacter.setText(characterArrayList.get(position).getLocation().getName());
     }
 
     @Override
     public int getItemCount() {
-        return resultsArrayList.size();
+        return characterArrayList.size();
     }
 
     public class CharacterViewHolder extends RecyclerView.ViewHolder {
@@ -96,7 +96,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
             nameCharacter.setOnClickListener(v ->{
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DataCharacter.class);
-                intent.putExtra(URL,resultsArrayList.get(getAdapterPosition()).getUrl());
+                intent.putExtra(URL, characterArrayList.get(getAdapterPosition()).getUrl());
                 context.startActivity(intent);
             });
         }

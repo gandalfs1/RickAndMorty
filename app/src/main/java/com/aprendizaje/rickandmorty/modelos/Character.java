@@ -1,11 +1,11 @@
 package com.aprendizaje.rickandmorty.modelos;
 
-import com.aprendizaje.rickandmorty.database.Location;
+import static com.aprendizaje.rickandmorty.MainActivity.characterModel;
 import com.aprendizaje.rickandmorty.database.Origin;
 
 import java.util.ArrayList;
 
-public class Results {
+public class Character {
     int id;
     String name;
     String status;
@@ -19,7 +19,11 @@ public class Results {
     String url;
     String created;
 
-    public Results() {
+    public static Character getInstance() {
+        if (characterModel == null){
+            characterModel = new Character();
+        }
+        return characterModel;
     }
 
     public int getId() {

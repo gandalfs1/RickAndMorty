@@ -1,5 +1,6 @@
 package com.aprendizaje.rickandmorty.actividades;
 
+import static com.aprendizaje.rickandmorty.MainActivity.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,11 +28,9 @@ import org.json.JSONObject;
 
 public class Locations extends AppCompatActivity {
     InsertRegisters insertRegisters;
-    AnswersLocations answersLocations;
     Gson gson;
     RequestQueue requestQueue;
     ReadRegisters readRegisters;
-    Api api;
     RecyclerView recyclerViewLocations;
     AdapterLocations adapterLocations;
     TextView txt ;
@@ -45,13 +44,12 @@ public class Locations extends AppCompatActivity {
     }
     private void init(){
         insertRegisters = new InsertRegisters(this);
-        answersLocations = new AnswersLocations();
+        answersLocations = AnswersLocations.getInstance();
+        api = Api.getInstance();
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
         readRegisters = new ReadRegisters(this);
-        api = new Api();
         readRegisters = new ReadRegisters(this);
-        api= readRegisters.readUrls();
         recyclerViewLocations = findViewById(R.id.recyclerViewLocations);
         getLocations();
     }

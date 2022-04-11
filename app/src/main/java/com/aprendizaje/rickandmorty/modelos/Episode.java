@@ -1,5 +1,7 @@
 package com.aprendizaje.rickandmorty.modelos;
 
+import static com.aprendizaje.rickandmorty.MainActivity.episodeModel;
+
 import java.util.ArrayList;
 
 public class Episode {
@@ -12,7 +14,11 @@ public class Episode {
     String url;
     String created;
 
-    public Episode() {
+    public static Episode getInstance() {
+        if (episodeModel == null){
+            episodeModel = new Episode();
+        }
+        return episodeModel;
     }
 
     public int getId() {

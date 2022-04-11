@@ -1,12 +1,18 @@
 package com.aprendizaje.rickandmorty.modelos;
 
+import static com.aprendizaje.rickandmorty.MainActivity.answersLocations;
+
 import java.util.ArrayList;
 
 public class AnswersLocations {
     Info info;
     ArrayList<Location> results;
 
-    public AnswersLocations() {
+    public static AnswersLocations getInstance() {
+        if (answersLocations == null){
+            answersLocations = new AnswersLocations();
+        }
+        return answersLocations;
     }
 
     public Info getInfo() {

@@ -1,5 +1,5 @@
 package com.aprendizaje.rickandmorty.modelos;
-
+import static com.aprendizaje.rickandmorty.MainActivity.*;
 import java.util.ArrayList;
 
 public class AnswersEpisodes {
@@ -7,7 +7,11 @@ public class AnswersEpisodes {
     Info info;
     ArrayList<Episode> results;
 
-    public AnswersEpisodes() {
+    public static AnswersEpisodes getInstance() {
+        if (answersEpisodes == null){
+            answersEpisodes = new AnswersEpisodes();
+        }
+        return answersEpisodes;
     }
 
     public Info getInfo() {

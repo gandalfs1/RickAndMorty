@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
+import static com.aprendizaje.rickandmorty.MainActivity.*;
 import com.aprendizaje.rickandmorty.R;
 import com.aprendizaje.rickandmorty.adaptadores.AdapterEpisodes;
 import com.aprendizaje.rickandmorty.database.InsertRegisters;
@@ -28,11 +29,9 @@ import org.json.JSONObject;
 public class Episodes extends AppCompatActivity {
 
     InsertRegisters insertRegisters;
-    AnswersEpisodes answersEpisodes;
     Gson gson;
     RequestQueue requestQueue;
     ReadRegisters readRegisters;
-    Api api;
     RecyclerView recyclerViewEpisode;
     AdapterEpisodes adapterEpisodes;
 
@@ -46,13 +45,12 @@ public class Episodes extends AppCompatActivity {
 
     private void init(){
         insertRegisters = new InsertRegisters(this);
-        answersEpisodes = new AnswersEpisodes();
+        answersEpisodes = AnswersEpisodes.getInstance();
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
         readRegisters = new ReadRegisters(this);
-        api = new Api();
+        api = Api.getInstance();
         readRegisters = new ReadRegisters(this);
-        api= readRegisters.readUrls();
         recyclerViewEpisode = findViewById(R.id.recyclerViewEpisode);
         getEpisodes();
     }

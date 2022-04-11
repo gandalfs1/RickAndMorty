@@ -1,5 +1,6 @@
 package com.aprendizaje.rickandmorty.actividades;
 
+import static com.aprendizaje.rickandmorty.MainActivity.characterModel;
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.URL;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.R;
 import com.aprendizaje.rickandmorty.adaptadores.AdapterCharactersEpisode;
-import com.aprendizaje.rickandmorty.modelos.Results;
+import com.aprendizaje.rickandmorty.modelos.Character;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -29,7 +30,6 @@ public class DataCharacter extends AppCompatActivity {
     AdapterCharactersEpisode adapterCharactersEpisode;
     RecyclerView recyclerViewEpisodes;
     String url ;
-    Results results;
     Gson gson;
     RequestQueue requestQueue;
 
@@ -39,7 +39,7 @@ public class DataCharacter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_character);
         recyclerViewEpisodes = findViewById(R.id.recyclerViewEpisodes);
-        results = new Results();
+        characterModel = Character.getInstance();
         gson = new Gson();
 
         requestQueue = Volley.newRequestQueue(this);
@@ -52,9 +52,9 @@ public class DataCharacter extends AppCompatActivity {
         JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                results = gson.fromJson(response.toString(), Results.class);
+                characterModel = gson.fromJson(response.toString(), Character.class);
 
-                arrar(results.getEpisode());
+                arrar(characterModel.getEpisode());
             }
         }, new Response.ErrorListener() {
             @Override

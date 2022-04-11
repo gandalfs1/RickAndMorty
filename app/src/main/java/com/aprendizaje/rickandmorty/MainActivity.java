@@ -30,6 +30,9 @@ import com.aprendizaje.rickandmorty.modelos.AnswersCharacters;
 import com.aprendizaje.rickandmorty.modelos.AnswersEpisodes;
 import com.aprendizaje.rickandmorty.modelos.AnswersLocations;
 import com.aprendizaje.rickandmorty.modelos.Api;
+import com.aprendizaje.rickandmorty.modelos.Character;
+import com.aprendizaje.rickandmorty.modelos.Episode;
+import com.aprendizaje.rickandmorty.modelos.Location;
 import com.aprendizaje.rickandmorty.modelos.Menu;
 import com.google.gson.Gson;
 
@@ -42,10 +45,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements CallbackMenu {
     RequestQueue requestQueue;
     TextView verTexto;
-    Api api;
-    AnswersCharacters answersCharacters;
-    AnswersLocations answersLocations;
-    AnswersEpisodes answersEpisodes;
+    public static Api api = null;
+    public static AnswersCharacters answersCharacters = null;
+    public static Character characterModel = null;
+    public static AnswersLocations answersLocations = null;
+    public static Location locationModel = null;
+    public static AnswersEpisodes answersEpisodes = null;
+    public static Episode episodeModel = null;
     Gson gson;
     InsertRegisters insertRegisters;
     ReadRegisters readRegisters;
@@ -92,13 +98,10 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
     private void init() {
         requestQueue = Volley.newRequestQueue(this);
-        api = new Api();
+        api = Api.getInstance();
         gson = new Gson();
         insertRegisters = new InsertRegisters(this);
         readRegisters = new ReadRegisters(this);
-        answersCharacters = new AnswersCharacters();
-        answersLocations = new AnswersLocations();
-        answersEpisodes = new AnswersEpisodes();
         recyclerViewMenu = findViewById(R.id.recyclerViewMenu);
         listMenu = new ArrayList<>();
         listMenu.add(new Menu(IMG_MENU_CHARACTERS, NAME_MENU_CHARACTES));

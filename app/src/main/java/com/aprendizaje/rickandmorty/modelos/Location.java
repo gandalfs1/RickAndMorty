@@ -1,4 +1,5 @@
 package com.aprendizaje.rickandmorty.modelos;
+import static com.aprendizaje.rickandmorty.MainActivity.locationModel;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,11 @@ public class Location {
     String url;
     String created;
 
-    public Location() {
+    public static Location getInstance() {
+        if (locationModel == null){
+            locationModel = new Location();
+        }
+        return locationModel;
     }
 
     public int getId() {

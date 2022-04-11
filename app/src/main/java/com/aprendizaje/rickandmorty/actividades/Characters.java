@@ -1,5 +1,7 @@
 package com.aprendizaje.rickandmorty.actividades;
 
+import static com.aprendizaje.rickandmorty.MainActivity.*;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +21,7 @@ import com.aprendizaje.rickandmorty.adaptadores.AdapterCharacters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
 import com.aprendizaje.rickandmorty.modelos.AnswersCharacters;
 import com.aprendizaje.rickandmorty.modelos.Api;
-import com.aprendizaje.rickandmorty.modelos.Results;
+import com.aprendizaje.rickandmorty.modelos.Character;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -27,21 +29,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Characters extends AppCompatActivity {
-    Api api;
+
     Gson gson;
     RequestQueue requestQueue;
-    AnswersCharacters answersCharacters;
     ReadRegisters readRegisters;
     RecyclerView recyclerViewCharacters;
     AdapterCharacters adapterCharacters;
-    ArrayList<Results> arrayList;
+    ArrayList<Character> arrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character);
-        api = new Api();
-        answersCharacters = new AnswersCharacters();
+        api = Api.getInstance();
+        answersCharacters = AnswersCharacters.getInstance();
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
         readRegisters = new ReadRegisters(this);
@@ -52,7 +53,7 @@ public class Characters extends AppCompatActivity {
     }
 
     private void read(){
-        if((api = readRegisters.readUrls()) != null){
+        if(api.getCharacters() != null){
             jsonObjet();
         }else{
             Toast.makeText(Characters.this, "no se encontraron ursl", Toast.LENGTH_SHORT).show();
@@ -67,7 +68,6 @@ public class Characters extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
                 arrar(answersCharacters.getResults());
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -79,7 +79,7 @@ public class Characters extends AppCompatActivity {
         requestQueue.add(jsonRequest);
     }
 
-    private void arrar(ArrayList<Results> results) {
+    private void arrar(ArrayList<Character> results) {
         adapterCharacters = new AdapterCharacters(results,Characters.this);
         recyclerViewCharacters.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCharacters.setAdapter(adapterCharacters);

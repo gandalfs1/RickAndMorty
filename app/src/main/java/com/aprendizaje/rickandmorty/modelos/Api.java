@@ -1,11 +1,17 @@
 package com.aprendizaje.rickandmorty.modelos;
 
+import com.aprendizaje.rickandmorty.MainActivity;
+
 public class Api {
     String characters;
     String locations;
     String episodes;
 
-    public Api() {
+    public static Api getInstance() {
+        if (MainActivity.api == null){
+            MainActivity.api = new Api();
+        }
+        return MainActivity.api;
     }
 
     public String getCharacters() {
