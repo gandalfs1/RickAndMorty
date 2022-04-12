@@ -2,7 +2,6 @@ package com.aprendizaje.rickandmorty.database;
 
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +17,7 @@ public class ReadRegisters extends DataBase{
         this.context = context;
     }
 
-    @SuppressLint("Range")
+
     public Api readUrls(){
         try {
             DataBase dataBase = new DataBase(context);
@@ -31,6 +30,23 @@ public class ReadRegisters extends DataBase{
                 api.setCharacters(cursor.getString(0));
                 api.setLocations(cursor.getString(1));
                 api.setEpisodes(cursor.getString(2));
+            }
+            return api;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Api readChaCEpi(int idCha){
+        try {
+            DataBase dataBase = new DataBase(context);
+            SQLiteDatabase sqLiteDatabase = dataBase.getReadableDatabase();
+            Api api = new Api();
+            String query = "SELECT * FROM " + CREATE_TABLE_CHA_X_EPI;
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            if (cursor != null){
+                cursor.moveToFirst();
+
             }
             return api;
         } catch (Exception e) {
