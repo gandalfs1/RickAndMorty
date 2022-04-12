@@ -2,7 +2,6 @@ package com.aprendizaje.rickandmorty.database;
 
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,7 +42,7 @@ public class ReadRegisters extends DataBase{
             DataBase dataBase = new DataBase(context);
             SQLiteDatabase sqLiteDatabase = dataBase.getReadableDatabase();
             Api api = new Api();
-            String query = "SELECT * FROM "+ TABLE_CHA_X_EPI;
+            String query = "SELECT * FROM " + CREATE_TABLE_CHA_X_EPI;
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             if (cursor != null){
                 cursor.moveToFirst();

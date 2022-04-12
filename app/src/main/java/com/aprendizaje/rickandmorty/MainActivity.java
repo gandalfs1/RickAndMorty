@@ -1,6 +1,14 @@
 package com.aprendizaje.rickandmorty;
 
-import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.BASEURL;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.IMG_MENU_CHARACTERS;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.IMG_MENU_EPISODES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.IMG_MENU_FAVORITES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.IMG_MENU_LOCATIONS;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.NAME_MENU_CHARACTES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.NAME_MENU_EPISODES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.NAME_MENU_FAVORITES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.NAME_MENU_LOCATIONS;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -70,7 +78,14 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
         // stringRequest();
         //jsonArrayRequest();
-        getData(BASEURL,"base");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+        getData(BASEURL, "base");
+
         if ((api = readRegisters.readUrls()) == null) {
             // getUrls();
             Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
@@ -189,24 +204,32 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
                     case "base":
                         api = gson.fromJson(response.toString(), Api.class);
                         insertRegisters.insertUrls(api);
-                        getData(api.getCharacters(),"character");
+                        getData(api.getCharacters(), "character");
                         break;
                     case "character":
                         answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
-                        getData(api.getLocations(),"locations");
+                        insertRegisters.insertCharacter(answersCharacters.getResults());
+                        if (answersCharacters.getInfo().getNext() != null)
+                            getData(answersCharacters.getInfo().getNext(), "character");
+                        else
+                            getData(api.getLocations(), "locations");
                         break;
                     case "locations":
                         answersLocations = gson.fromJson(response.toString(), AnswersLocations.class);
-                        getData(api.getEpisodes(),"episodes");
+                        insertRegisters.insertLocation(answersLocations.getResults());
+                        if (answersLocations.getInfo().getNext() != null)
+                            getData(answersLocations.getInfo().getNext(), "locations");
+                        else
+                            getData(api.getEpisodes(), "episodes");
                         break;
                     case "episodes":
                         answersEpisodes = gson.fromJson(response.toString(), AnswersEpisodes.class);
                         insertRegisters.insertEpisodes(answersEpisodes.getResults());
-                        getData(answersEpisodes.getInfo().getNext(),"episodes");
-                        if (answersEpisodes.getInfo().getNext() == null) {
-                            Toast.makeText(MainActivity.this, "Terminado", Toast.LENGTH_SHORT).show();
-                        }
+                        if (answersEpisodes.getInfo().getNext() != null)
+                            getData(answersEpisodes.getInfo().getNext(), "episodes");
                         break;
+                    default:
+                        Toast.makeText(MainActivity.this, "Insertado completado", Toast.LENGTH_SHORT).show();
                 }
 
             }

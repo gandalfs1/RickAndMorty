@@ -83,6 +83,11 @@ public class Constantes {
             + COLUMN_ID_CHA+" INTEGER,"
             + COLUMN_ID_EPI+" INTEGER );";
 
+    public static final String TABLE_LOC_X_CHA = "loc_x_cha";
+    public static final String COLUMN_ID_LOC = "id_loc";
+    public static final String CREATE_TABLE_LOC_X_CHA = "CREATE TABLE "+ TABLE_LOC_X_CHA +" ( "
+            + COLUMN_ID_LOC+" INTEGER,"
+            + COLUMN_ID_CHA+" INTEGER );";
 
     public static final String IMG_MENU_CHARACTERS = "https://media.vogue.es/photos/5cc754b2c702372f61fe0388/master/w_1600,c_limit/rick_y_morty_7132.jpg";
     public static final String IMG_MENU_LOCATIONS = "https://images8.alphacoders.com/642/thumb-1920-642527.jpg";

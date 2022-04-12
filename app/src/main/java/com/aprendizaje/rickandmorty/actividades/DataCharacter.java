@@ -69,7 +69,7 @@ public class DataCharacter extends AppCompatActivity {
     }
 
     private void arrar(ArrayList<String> character, int idCha) {
-        insertRegisters.insertChaXEpi(character, idCha);
+        //insertRegisters.insertChaXEpi(character, idCha);
         adapterCharactersEpisode = new AdapterCharactersEpisode(character, DataCharacter.this);
         recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,3));
         recyclerViewEpisodes.setAdapter(adapterCharactersEpisode);
