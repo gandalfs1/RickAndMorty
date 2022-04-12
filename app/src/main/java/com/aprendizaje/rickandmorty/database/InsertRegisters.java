@@ -48,15 +48,15 @@ public class InsertRegisters extends DataBase{
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(COLUMN_ID_CHARACTER,characterArrayList.get(i).getId());
                 contentValues.put(COLUMN_NAME_CHARACTER,characterArrayList.get(i).getName());
-                contentValues.put(COLUMN_STATUS_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_TYPE_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_GENDER_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_ORIGIN_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_LOCATION_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_IMAGE_CHARACTER,characterArrayList.get(i).getCreated());
-                contentValues.put(COLUMN_EPISODE_CHARACTER,characterArrayList.get(i).getCreated());
+                contentValues.put(COLUMN_SPECIES_CHARACTER,characterArrayList.get(i).getSpecies());
+                contentValues.put(COLUMN_STATUS_CHARACTER,characterArrayList.get(i).getStatus());
+                contentValues.put(COLUMN_TYPE_CHARACTER,characterArrayList.get(i).getType());
+                contentValues.put(COLUMN_GENDER_CHARACTER,characterArrayList.get(i).getGender());
+                contentValues.put(COLUMN_ORIGIN_CHARACTER,characterArrayList.get(i).getOrigin().getUrl());
+                contentValues.put(COLUMN_LOCATION_CHARACTER,characterArrayList.get(i).getLocation().getUrl());
+                contentValues.put(COLUMN_IMAGE_CHARACTER,characterArrayList.get(i).getImage());
                 insertChaXEpi(characterArrayList.get(i).getEpisode(),characterArrayList.get(i).getId());
-                contentValues.put(COLUMN_URL_CHARACTER,characterArrayList.get(i).getCreated());
+                contentValues.put(COLUMN_URL_CHARACTER,characterArrayList.get(i).getUrl());
                 contentValues.put(COLUMN_CREATED_CHARACTER,characterArrayList.get(i).getCreated());
                 id = sqLiteDatabase.insert(TABLE_CHARACTERS, null,contentValues);
             }
