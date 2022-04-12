@@ -32,7 +32,7 @@ public class Constantes {
             + COLUMN_URL_lOCATION + " TEXT,"
             + COLUMN_CREATED_lOCATION + " TEXT );";
 
-    public static final String TABLE_EPISODES ="episodes";
+    public static final String TABLE_EPISODES = "episodes";
     public static final String COLUMN_ID_EPISODE = "col_id_episode";
     public static final String COLUMN_NAME_EPISODE = "col_name_episode";
     public static final String COLUMN_AIR_DATE_EPISODE = "col_air_date_episode";
@@ -41,16 +41,15 @@ public class Constantes {
     public static final String COLUMN_URL_EPISODE = "col_url_episode";
     public static final String COLUMN_CREATED_EPISODE = "col_created_episode";
     public static final String CREATE_TABLE_EPISODES = "CREATE TABLE " + TABLE_EPISODES + " ( "
-            + COLUMN_ID_lOCATION + " INTEGER,"
+            + COLUMN_ID_EPISODE + " INTEGER,"
             + COLUMN_NAME_EPISODE + " TEXT,"
             + COLUMN_AIR_DATE_EPISODE + " TEXT,"
             + COLUMN_CODE_EPISODE + " TEXT,"
             + COLUMN_CHARACTES_EPISODE + " TEXT,"
             + COLUMN_URL_EPISODE + " TEXT,"
-            + COLUMN_CREATED_EPISODE + " TEXT,"
-            + COLUMN_CREATED_lOCATION + " TEXT );";
+            + COLUMN_CREATED_EPISODE + " TEXT );";
 
-    public static final String TABLE_CHARACTERS ="characters";
+    public static final String TABLE_CHARACTERS = "characters";
     public static final String COLUMN_ID_CHARACTER = "col_id_character";
     public static final String COLUMN_NAME_CHARACTER = "col_name_character";
     public static final String COLUMN_STATUS_CHARACTER = "col_status_character";
@@ -77,6 +76,13 @@ public class Constantes {
             + COLUMN_URL_CHARACTER + " TEXT,"
             + COLUMN_CREATED_CHARACTER + " TEXT );";
 
+    public static final String TABLE_CHA_X_EPI = "cha_x_epi";
+    public static final String COLUMN_ID_CHA = "id_cha";
+    public static final String COLUMN_ID_EPI = "id_epi";
+    public static final String CREATE_TABLE_CHA_X_EPI = "CREATE TABLE "+ TABLE_CHA_X_EPI +" ( "
+            + COLUMN_ID_CHA+" INTEGER,"
+            + COLUMN_ID_EPI+" INTEGER );";
+
 
     public static final String IMG_MENU_CHARACTERS = "https://media.vogue.es/photos/5cc754b2c702372f61fe0388/master/w_1600,c_limit/rick_y_morty_7132.jpg";
     public static final String IMG_MENU_LOCATIONS = "https://images8.alphacoders.com/642/thumb-1920-642527.jpg";
@@ -85,5 +91,5 @@ public class Constantes {
     public static final String NAME_MENU_CHARACTES = "CHARACTERS";
     public static final String NAME_MENU_LOCATIONS = "LOCATIONS";
     public static final String NAME_MENU_EPISODES = "EPISODES";
-    public static final String NAME_MENU_FAVORITES ="FAVORITES";
+    public static final String NAME_MENU_FAVORITES = "FAVORITES";
 }

@@ -5,8 +5,6 @@ import static com.aprendizaje.rickandmorty.MainActivity.episodeModel;
 import static com.aprendizaje.rickandmorty.utilidades.Constantes.URL;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -18,36 +16,27 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.R;
-import com.aprendizaje.rickandmorty.adaptadores.AdapterCharactersEpisode;
-import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.modelos.Character;
+import com.aprendizaje.rickandmorty.modelos.Episode;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class DataCharacter extends AppCompatActivity {
-
-    AdapterCharactersEpisode adapterCharactersEpisode;
-    RecyclerView recyclerViewEpisodes;
+public class DataEpisode extends AppCompatActivity {
     String url ;
     Gson gson;
     RequestQueue requestQueue;
-    InsertRegisters insertRegisters;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_data_character);
-        recyclerViewEpisodes = findViewById(R.id.recyclerViewEpisodes);
-        characterModel = Character.getInstance();
+        setContentView(R.layout.activity_data_episode);
         gson = new Gson();
-        insertRegisters = new InsertRegisters(this);
         requestQueue = Volley.newRequestQueue(this);
         Bundle extras = getIntent().getExtras();
         url = extras.getString(URL);
+        episodeModel = Episode.getInstance();
         jsonObjet();
     }
 
@@ -55,8 +44,9 @@ public class DataCharacter extends AppCompatActivity {
         JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                characterModel = gson.fromJson(response.toString(), Character.class);
-                arrar(characterModel.getEpisode(), characterModel.getId());
+                episodeModel = gson.fromJson(response.toString(), Episode.class);
+
+                arrar(episodeModel);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -68,11 +58,6 @@ public class DataCharacter extends AppCompatActivity {
         requestQueue.add(jsonRequest);
     }
 
-    private void arrar(ArrayList<String> character, int idCha) {
-        insertRegisters.insertChaXEpi(character, idCha);
-        adapterCharactersEpisode = new AdapterCharactersEpisode(character, DataCharacter.this);
-        recyclerViewEpisodes.setLayoutManager(new GridLayoutManager(this,3));
-        recyclerViewEpisodes.setAdapter(adapterCharactersEpisode);
-
+    private void arrar(Episode episode) {
     }
 }

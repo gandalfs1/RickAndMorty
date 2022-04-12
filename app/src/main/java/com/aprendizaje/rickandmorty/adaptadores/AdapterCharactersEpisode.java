@@ -18,7 +18,8 @@ public class AdapterCharactersEpisode extends RecyclerView.Adapter<AdapterCharac
     ArrayList<String> listEpisodes;
     Activity activity;
 
-    public AdapterCharactersEpisode(ArrayList<String> listEpisodes, Activity activity) {
+    public
+    AdapterCharactersEpisode(ArrayList<String> listEpisodes, Activity activity) {
         this.listEpisodes = listEpisodes;
         this.activity = activity;
     }

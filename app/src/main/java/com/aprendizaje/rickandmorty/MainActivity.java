@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
     RecyclerView recyclerViewMenu;
     ArrayList<Menu> listMenu;
     MenuAdapter menuAdapter;
+    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +70,11 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
         // stringRequest();
         //jsonArrayRequest();
-        if((api = readRegisters.readUrls()) == null){
-            getUrls();
+        getData(BASEURL,"base");
+        if ((api = readRegisters.readUrls()) == null) {
+            // getUrls();
             Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(MainActivity.this, "Ya estan los registros", Toast.LENGTH_SHORT).show();
         }
 
@@ -80,8 +82,8 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
     @Override
     public void clickListener(Menu menu) {
-     //   Toast.makeText(this, "hola name"+ menu.getName(), Toast.LENGTH_SHORT).show();
-        switch (menu.getName()){
+        //   Toast.makeText(this, "hola name"+ menu.getName(), Toast.LENGTH_SHORT).show();
+        switch (menu.getName()) {
             case NAME_MENU_CHARACTES:
                 startActivity(new Intent(this, Characters.class));
                 break;
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
         listMenu.add(new Menu(IMG_MENU_LOCATIONS, NAME_MENU_LOCATIONS));
         listMenu.add(new Menu(IMG_MENU_EPISODES, NAME_MENU_EPISODES));
         listMenu.add(new Menu(IMG_MENU_FAVORITES, NAME_MENU_FAVORITES));
-        menuAdapter = new MenuAdapter(MainActivity.this, listMenu ,MainActivity.this::clickListener);
+        menuAdapter = new MenuAdapter(MainActivity.this, listMenu, MainActivity.this::clickListener);
         recyclerViewMenu.setLayoutManager(new GridLayoutManager(MainActivity.this, 1));
         recyclerViewMenu.setAdapter(menuAdapter);
     }
@@ -163,8 +165,6 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
             @Override
             public void onResponse(JSONObject response) {
                 api = gson.fromJson(response.toString(), Api.class);
-                // verTexto.setText(response.toString());
-
                 if (insertRegisters.insertUrls(api) > 0) {
                     Toast.makeText(MainActivity.this, "Se Agregaron urls", Toast.LENGTH_SHORT).show();
                 } else {
@@ -186,14 +186,26 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
             @Override
             public void onResponse(JSONObject response) {
                 switch (type) {
+                    case "base":
+                        api = gson.fromJson(response.toString(), Api.class);
+                        insertRegisters.insertUrls(api);
+                        getData(api.getCharacters(),"character");
+                        break;
                     case "character":
                         answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
+                        getData(api.getLocations(),"locations");
                         break;
                     case "locations":
                         answersLocations = gson.fromJson(response.toString(), AnswersLocations.class);
+                        getData(api.getEpisodes(),"episodes");
                         break;
                     case "episodes":
                         answersEpisodes = gson.fromJson(response.toString(), AnswersEpisodes.class);
+                        insertRegisters.insertEpisodes(answersEpisodes.getResults());
+                        getData(answersEpisodes.getInfo().getNext(),"episodes");
+                        if (answersEpisodes.getInfo().getNext() == null) {
+                            Toast.makeText(MainActivity.this, "Terminado", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                 }
 

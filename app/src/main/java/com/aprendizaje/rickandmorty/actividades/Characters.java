@@ -18,10 +18,12 @@ import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.aprendizaje.rickandmorty.R;
 import com.aprendizaje.rickandmorty.adaptadores.AdapterCharacters;
+import com.aprendizaje.rickandmorty.database.InsertRegisters;
 import com.aprendizaje.rickandmorty.database.ReadRegisters;
 import com.aprendizaje.rickandmorty.modelos.AnswersCharacters;
 import com.aprendizaje.rickandmorty.modelos.Api;
 import com.aprendizaje.rickandmorty.modelos.Character;
+import com.aprendizaje.rickandmorty.modelos.Info;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -36,6 +38,7 @@ public class Characters extends AppCompatActivity {
     RecyclerView recyclerViewCharacters;
     AdapterCharacters adapterCharacters;
     ArrayList<Character> arrayList;
+    InsertRegisters insertRegisters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class Characters extends AppCompatActivity {
         readRegisters = new ReadRegisters(this);
         arrayList = new ArrayList<>();
         recyclerViewCharacters = findViewById(R.id.recyclerViewCharacters);
+        insertRegisters = new InsertRegisters(this);
         read();
 
     }
@@ -67,6 +71,7 @@ public class Characters extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
+
                 arrar(answersCharacters.getResults());
             }
         }, new Response.ErrorListener() {

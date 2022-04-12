@@ -20,6 +20,7 @@ public class DataBase extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(CREATE_TABLE_URLS);
         sqLiteDatabase.execSQL(CREATE_TABLE_EPISODES);
+        sqLiteDatabase.execSQL(CREATE_TABLE_CHA_X_EPI);
 
     }
 
