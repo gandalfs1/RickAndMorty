@@ -38,7 +38,6 @@ public class Characters extends AppCompatActivity {
     RecyclerView recyclerViewCharacters;
     AdapterCharacters adapterCharacters;
     ArrayList<Character> arrayList;
-    InsertRegisters insertRegisters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,37 +50,11 @@ public class Characters extends AppCompatActivity {
         readRegisters = new ReadRegisters(this);
         arrayList = new ArrayList<>();
         recyclerViewCharacters = findViewById(R.id.recyclerViewCharacters);
-        insertRegisters = new InsertRegisters(this);
-        read();
-
+        runOnUiThread(() -> read());
     }
 
     private void read(){
-        if(api.getCharacters() != null){
-            jsonObjet();
-        }else{
-            Toast.makeText(Characters.this, "no se encontraron ursl", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-    }
-
-    private void jsonObjet() {
-
-        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, api.getCharacters(), null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
-
-                arrar(answersCharacters.getResults());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-
-        requestQueue.add(jsonRequest);
+       arrar(readRegisters.readCharacter());
     }
 
     private void arrar(ArrayList<Character> results) {
