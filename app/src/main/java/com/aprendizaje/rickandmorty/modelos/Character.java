@@ -18,6 +18,7 @@ public class Character {
     ArrayList<String> episode;
     String url;
     String created;
+    String firstEpisode;
 
     public static Character getInstance() {
         if (characterModel == null){
@@ -120,5 +121,13 @@ public class Character {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getFirstEpisode() {
+        return firstEpisode;
+    }
+
+    public void setFirstEpisode(String firstEpisode) {
+        this.firstEpisode = firstEpisode;
     }
 }

@@ -29,6 +29,12 @@ public class DataBase extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_URLS);
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_CHARACTERS);
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_lOCATIONS);
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_EPISODES);
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_CHA_X_EPI);
+        sqLiteDatabase.execSQL("DROP TABLE "+TABLE_LOC_X_CHA);
 
     }
 }

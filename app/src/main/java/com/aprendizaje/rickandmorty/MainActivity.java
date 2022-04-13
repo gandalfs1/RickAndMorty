@@ -78,16 +78,11 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
         // stringRequest();
         //jsonArrayRequest();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-            }
-        });
-        getData(BASEURL, "base");
 
-        if ((api = readRegisters.readUrls()) == null) {
-            // getUrls();
+
+        if (readRegisters.readUrls() == null) {
+            runOnUiThread(() -> getData(BASEURL, "base"));
             Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(MainActivity.this, "Ya estan los registros", Toast.LENGTH_SHORT).show();
@@ -186,60 +181,50 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
                     Toast.makeText(MainActivity.this, "Error al agregar urls", Toast.LENGTH_SHORT).show();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                verTexto.setText("error en la url");
-            }
-        });
+        }, error -> verTexto.setText("error en la url"));
 
         requestQueue.add(jsonRequest);
     }
 
+    /**
+     *
+     * @param url la que descargara 
+     * @param type typo de descarga
+     */
     private void getData(String url, String type) {
-        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                switch (type) {
-                    case "base":
-                        api = gson.fromJson(response.toString(), Api.class);
-                        insertRegisters.insertUrls(api);
-                        getData(api.getCharacters(), "character");
-                        break;
-                    case "character":
-                        answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
-                        insertRegisters.insertCharacter(answersCharacters.getResults());
-                        if (answersCharacters.getInfo().getNext() != null)
-                            getData(answersCharacters.getInfo().getNext(), "character");
-                        else
-                            getData(api.getLocations(), "locations");
-                        break;
-                    case "locations":
-                        answersLocations = gson.fromJson(response.toString(), AnswersLocations.class);
-                        insertRegisters.insertLocation(answersLocations.getResults());
-                        if (answersLocations.getInfo().getNext() != null)
-                            getData(answersLocations.getInfo().getNext(), "locations");
-                        else
-                            getData(api.getEpisodes(), "episodes");
-                        break;
-                    case "episodes":
-                        answersEpisodes = gson.fromJson(response.toString(), AnswersEpisodes.class);
-                        insertRegisters.insertEpisodes(answersEpisodes.getResults());
-                        if (answersEpisodes.getInfo().getNext() != null)
-                            getData(answersEpisodes.getInfo().getNext(), "episodes");
-                        break;
-                    default:
-                        Toast.makeText(MainActivity.this, "Insertado completado", Toast.LENGTH_SHORT).show();
-                }
-
+        JsonRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+            switch (type) {
+                case "base":
+                    api = gson.fromJson(response.toString(), Api.class);
+                    insertRegisters.insertUrls(api);
+                    getData(api.getCharacters(), "character");
+                    break;
+                case "character":
+                    answersCharacters = gson.fromJson(response.toString(), AnswersCharacters.class);
+                    insertRegisters.insertCharacter(answersCharacters.getResults());
+                    if (answersCharacters.getInfo().getNext() != null)
+                        getData(answersCharacters.getInfo().getNext(), "character");
+                    else
+                        getData(api.getLocations(), "locations");
+                    break;
+                case "locations":
+                    answersLocations = gson.fromJson(response.toString(), AnswersLocations.class);
+                    insertRegisters.insertLocation(answersLocations.getResults());
+                    if (answersLocations.getInfo().getNext() != null)
+                        getData(answersLocations.getInfo().getNext(), "locations");
+                    else
+                        getData(api.getEpisodes(), "episodes");
+                    break;
+                case "episodes":
+                    answersEpisodes = gson.fromJson(response.toString(), AnswersEpisodes.class);
+                    insertRegisters.insertEpisodes(answersEpisodes.getResults());
+                    if (answersEpisodes.getInfo().getNext() != null)
+                        getData(answersEpisodes.getInfo().getNext(), "episodes");
+                    break;
+                default:
+                    Toast.makeText(MainActivity.this, "Insertado completado", Toast.LENGTH_SHORT).show();
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                verTexto.setText("error en la url");
-            }
-        });
-
+        }, error -> verTexto.setText("error en la url"));
         requestQueue.add(jsonRequest);
     }
 

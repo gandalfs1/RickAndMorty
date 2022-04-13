@@ -33,12 +33,7 @@ public class AdapterCharactersEpisode extends RecyclerView.Adapter<AdapterCharac
 
     @Override
     public void onBindViewHolder(@NonNull EpisodeViewHolder holder, int position) {
-
-        String episode = listEpisodes.get(position);
-        episode = episode.substring(40,episode.length());
-
-        holder.episodeNumber.setText(episode);
-
+        holder.episodeNumber.setText(listEpisodes.get(position));
     }
 
     @Override

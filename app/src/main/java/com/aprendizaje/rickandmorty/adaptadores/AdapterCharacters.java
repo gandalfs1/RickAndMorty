@@ -65,6 +65,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
         }
         holder.speciesCharacter.setText(characterArrayList.get(position).getSpecies());
         holder.locatioNameCharacter.setText(characterArrayList.get(position).getLocation().getName());
+        holder.firstSeenCharacter.setText(characterArrayList.get(position).getFirstEpisode());
     }
 
     @Override
@@ -78,6 +79,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
         TextView statusCharacter;
         TextView speciesCharacter;
         TextView locatioNameCharacter;
+        TextView firstSeenCharacter;
         ImageView aliveCharacter;
         ImageView deadCharacter;
         ImageView unknownCharacter;
@@ -89,6 +91,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
             statusCharacter = itemView.findViewById(R.id.statusCharacter);
             speciesCharacter = itemView.findViewById(R.id.speciesCharacter);
             locatioNameCharacter = itemView.findViewById(R.id.locatioNameCharacter);
+            firstSeenCharacter = itemView.findViewById(R.id.firstSeenCharacter);
             aliveCharacter = itemView.findViewById(R.id.aliveCharacter);
             deadCharacter = itemView.findViewById(R.id.deadCharacter);
             unknownCharacter = itemView.findViewById(R.id.unknownCharacter);
@@ -96,7 +99,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
             nameCharacter.setOnClickListener(v ->{
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DataCharacter.class);
-                intent.putExtra(URL, characterArrayList.get(getAdapterPosition()).getUrl());
+                intent.putExtra("ID", characterArrayList.get(getAdapterPosition()).getId());
                 context.startActivity(intent);
             });
         }
