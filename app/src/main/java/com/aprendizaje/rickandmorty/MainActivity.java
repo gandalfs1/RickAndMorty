@@ -77,14 +77,12 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
         init();
 
         // stringRequest();
-        //jsonArrayRequest();
-
-
-
-        if (readRegisters.readUrls() == null) {
+        //jsonArrayRequest()
+        if ((api = readRegisters.readUrls()) == null) {
             runOnUiThread(() -> getData(BASEURL, "base"));
             Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
         } else {
+
             Toast.makeText(MainActivity.this, "Ya estan los registros", Toast.LENGTH_SHORT).show();
         }
 

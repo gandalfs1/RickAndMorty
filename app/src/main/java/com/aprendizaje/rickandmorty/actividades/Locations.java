@@ -26,6 +26,8 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class Locations extends AppCompatActivity {
     InsertRegisters insertRegisters;
     Gson gson;
@@ -34,6 +36,7 @@ public class Locations extends AppCompatActivity {
     RecyclerView recyclerViewLocations;
     AdapterLocations adapterLocations;
     TextView txt ;
+    ArrayList<Locations> listLocations;
 
 
     @Override
@@ -48,7 +51,6 @@ public class Locations extends AppCompatActivity {
         api = Api.getInstance();
         gson = new Gson();
         requestQueue = Volley.newRequestQueue(this);
-        readRegisters = new ReadRegisters(this);
         readRegisters = new ReadRegisters(this);
         recyclerViewLocations = findViewById(R.id.recyclerViewLocations);
         getLocations();
