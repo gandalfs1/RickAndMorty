@@ -69,7 +69,7 @@ public class ReadRegisters extends DataBase {
 
 
     @SuppressLint("Range")
-    public ArrayList<Character> readCharacter(int prev, int next) {
+    public ArrayList<Character> readCharacter(int prev, int next, String type) {
         ArrayList<Character> listCharacter = new ArrayList<>();
         try {
             DataBase dataBase = new DataBase(context);
@@ -81,14 +81,14 @@ public class ReadRegisters extends DataBase {
                 cursor.moveToFirst();
                 do {
                     Character character = new Character();
-                    character.setId((cursor.getColumnIndex(COLUMN_ID_CHARACTER)));
+                    character.setId(Integer.parseInt((cursor.getString(cursor.getColumnIndex(COLUMN_ID_CHARACTER)))));
                     character.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CHARACTER)));
                     character.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS_CHARACTER)));
                     character.setSpecies(cursor.getString(cursor.getColumnIndex(COLUMN_SPECIES_CHARACTER)));
                     character.setOrigin(readOrigin(cursor.getString(cursor.getColumnIndex(COLUMN_ORIGIN_CHARACTER))));
                     character.setLocation(readLocationName(cursor.getString(cursor.getColumnIndex(COLUMN_LOCATION_CHARACTER))));
                     character.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE_CHARACTER)));
-                    character.setEpisode(readChaXEpi(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID_CHARACTER))), "character"));
+                    character.setEpisode(readChaXEpi(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID_CHARACTER))), type));
                     character.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_URL_CHARACTER)));
                     character.setCreated(cursor.getString(cursor.getColumnIndex(COLUMN_CREATED_CHARACTER)));
                     Episode episode = new Episode();
@@ -155,7 +155,10 @@ public class ReadRegisters extends DataBase {
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             if (cursor != null) {
                 cursor.moveToFirst();
-                list.add(cursor.getString(0));
+                do {
+
+                    list.add(cursor.getString(0));
+                }while (cursor.moveToNext());
             }
             cursor.close();
             return list;
@@ -163,6 +166,7 @@ public class ReadRegisters extends DataBase {
             e.printStackTrace();
             return null;
         }
+
     }
 
     @SuppressLint("Range")

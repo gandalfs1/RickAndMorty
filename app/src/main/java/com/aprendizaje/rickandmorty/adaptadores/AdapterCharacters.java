@@ -99,7 +99,7 @@ public class AdapterCharacters extends RecyclerView.Adapter<AdapterCharacters.Ch
             nameCharacter.setOnClickListener(v ->{
                 Context context = v.getContext();
                 Intent intent = new Intent(context, DataCharacter.class);
-                intent.putExtra(URL, characterArrayList.get(getAdapterPosition()).getUrl());
+                intent.putExtra("ID", characterArrayList.get(getAdapterPosition()).getId());
                 context.startActivity(intent);
             });
         }

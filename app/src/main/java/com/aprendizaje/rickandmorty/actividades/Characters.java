@@ -36,6 +36,7 @@ public class Characters extends AppCompatActivity {
     ArrayList<Character> arrayList;
     int prev = 1;
     int next = 20;
+    String type = "character";
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -83,7 +84,7 @@ public class Characters extends AppCompatActivity {
 
 
     private void read(int star, int end) {
-        arrar(readRegisters.readCharacter(star, end));
+        arrar(readRegisters.readCharacter(star, end, type));
     }
 
     private void arrar(ArrayList<Character> results) {
