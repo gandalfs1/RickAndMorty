@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements CallbackMenu {
 
 
 
-        if ((api = readRegisters.readUrls()) == null) {
+        if (readRegisters.readUrls() == null) {
             runOnUiThread(() -> getData(BASEURL, "base"));
             Toast.makeText(MainActivity.this, "No estan los registros", Toast.LENGTH_SHORT).show();
         } else {

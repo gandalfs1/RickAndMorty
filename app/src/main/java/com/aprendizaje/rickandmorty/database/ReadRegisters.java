@@ -1,6 +1,29 @@
 package com.aprendizaje.rickandmorty.database;
 
-import static com.aprendizaje.rickandmorty.utilidades.Constantes.*;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_AIR_DATE_EPISODE;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_CREATED_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_CREATED_EPISODE;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_ID_CHA;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_ID_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_ID_EPI;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_ID_EPISODE;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_IMAGE_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_LOCATION_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_NAME_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_NAME_EPISODE;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_NAME_lOCATION;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_ORIGIN_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_SPECIES_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_STATUS_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_URL_CHARACTER;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_URL_EPISODE;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.COLUMN_URL_lOCATION;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.TABLE_CHARACTERS;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.TABLE_CHA_X_EPI;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.TABLE_EPISODES;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.TABLE_URLS;
+import static com.aprendizaje.rickandmorty.utilidades.Constantes.TABLE_lOCATIONS;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
@@ -46,15 +69,15 @@ public class ReadRegisters extends DataBase {
 
 
     @SuppressLint("Range")
-    public ArrayList<Character> readCharacter() {
+    public ArrayList<Character> readCharacter(int prev, int next) {
         ArrayList<Character> listCharacter = new ArrayList<>();
         try {
             DataBase dataBase = new DataBase(context);
             SQLiteDatabase sqLiteDatabase = dataBase.getReadableDatabase();
 
-            String query = "SELECT * FROM " + TABLE_CHARACTERS;
+            String query = "SELECT * FROM " + TABLE_CHARACTERS + " WHERE " + COLUMN_ID_CHARACTER + " BETWEEN " + prev + " AND " + next;
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-            if (cursor != null) {
+            if (cursor != null && cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 do {
                     Character character = new Character();
@@ -90,23 +113,23 @@ public class ReadRegisters extends DataBase {
             DataBase dataBase = new DataBase(context);
             SQLiteDatabase sqLiteDatabase = dataBase.getReadableDatabase();
 
-                String query = "SELECT * FROM " + TABLE_EPISODES + " WHERE "+ COLUMN_ID_EPISODE + " = "+idEpisode;
-                Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-                if (cursor != null) {
-                    cursor.moveToFirst();
-                    do {
+            String query = "SELECT * FROM " + TABLE_EPISODES + " WHERE " + COLUMN_ID_EPISODE + " = " + idEpisode;
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            if (cursor != null ) {
+                cursor.moveToFirst();
+                do {
 
-                        episode.setId((cursor.getColumnIndex(COLUMN_ID_EPISODE)));
-                        episode.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_EPISODE)));
-                        episode.setAir_date(cursor.getString(cursor.getColumnIndex(COLUMN_AIR_DATE_EPISODE)));
-                        episode.setCodeEpisode(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CHARACTER)));
-                        episode.setCharacters(readChaXEpi(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID_EPISODE))), "episode"));
-                        episode.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_URL_EPISODE)));
-                        episode.setCreated(cursor.getString(cursor.getColumnIndex(COLUMN_CREATED_EPISODE)));
-                        //listEpisode.add(episode);
-                    } while (cursor.moveToNext());
-                    cursor.close();
-                }
+                    episode.setId((cursor.getColumnIndex(COLUMN_ID_EPISODE)));
+                    episode.setName(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_EPISODE)));
+                    episode.setAir_date(cursor.getString(cursor.getColumnIndex(COLUMN_AIR_DATE_EPISODE)));
+                    episode.setCodeEpisode(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_CHARACTER)));
+                    episode.setCharacters(readChaXEpi(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_ID_EPISODE))), "episode"));
+                    episode.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_URL_EPISODE)));
+                    episode.setCreated(cursor.getString(cursor.getColumnIndex(COLUMN_CREATED_EPISODE)));
+                    //listEpisode.add(episode);
+                } while (cursor.moveToNext());
+                cursor.close();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

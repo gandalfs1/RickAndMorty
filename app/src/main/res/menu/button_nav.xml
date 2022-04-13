@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/prev"
+    android:icon="@drawable/ic_baseline_arrow_back_ios_24"
+    android:title="prev" />
+    <item
+        android:id="@+id/place"
+        android:iconTint="#23E115"
+        android:title="" />
+    <item
+        android:id="@+id/place"
+        android:iconTint="#23E115"
+        android:title="" />
+    <item
+        android:id="@+id/place2"
+        android:title="" />
+    <item
+        android:id="@+id/netx"
+        android:iconTint="#23E115"
+        android:icon="@drawable/ic_baseline_navigate_next_24"
+        android:title="next" />
+</menu>
